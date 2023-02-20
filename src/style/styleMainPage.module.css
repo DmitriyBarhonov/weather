@@ -1,0 +1,28 @@
+/* BACKGROUND */
+  body {
+    /* background: url("https://r.mradx.net/img/08/DE47B3.jpg"), center center no-repeat;   */
+      background: url("https://kipmu.ru/wp-content/uploads/sky_chtk.jpeg"), center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+  }
+.formSearch{
+    display: flex;
+    justify-content: center;
+    margin-top: 10rem;
+}
+
+.itemList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.itemList div{
+    margin-top: 1.5rem;
+}
+
+.itemList div:first-child{
+    margin-top: .5rem;
+}
