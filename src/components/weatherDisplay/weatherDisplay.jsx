@@ -65,7 +65,7 @@ export const WeatherDislay = () => {
             </div>
             <div>
                 <div>
-                    Temperature:  {a.main.temp}<br></br>
+                    Temperature:  {a.main.temp} 
                     Feels like: {a.main.feels_like}
                 </div>
                 <div>
