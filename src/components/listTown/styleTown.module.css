@@ -1,0 +1,10 @@
+.grid_town_list{
+    display: flex;
+}
+.grid_town_list div{
+    margin-left: 1rem;
+}
+
+.grid_town_list:first-child{
+    margin: 0;
+}
