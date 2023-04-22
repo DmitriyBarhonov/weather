@@ -16,8 +16,8 @@ export const InputSearh: React.FC<InputPropsType> = (props) => {
         setNameTown(e.currentTarget.value)
     }
 
-    const setCityNameHandler = async () => {
-        await props.setCityName(nameTown)
+    const setCityNameHandler = () => {
+        props.setCityName(nameTown)
         setNameTown('')
     }
 
@@ -30,6 +30,7 @@ export const InputSearh: React.FC<InputPropsType> = (props) => {
                 value={nameTown}
                 style={{
                     width: 200,
+                    height: '100px', 
                 }}
             />
         </div>

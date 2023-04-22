@@ -1,10 +1,26 @@
 .grid_town_list{
-    display: flex;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    align-items: center;
+    justify-items: center;
 }
-.grid_town_list div{
-    margin-left: 1rem;
+.town_list_item {
+    text-align: center;
 }
 
-.grid_town_list:first-child{
+.grid_town_list:first-child {
     margin: 0;
+}
+
+.button_view {
+    margin-top: .6rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    padding:5px 12px ;
+    color: white;
+    border: 1px solid #fcd6f4 ;
+    background: -webkit-linear-gradient(90deg, #322de5,#00a8ec);
+    background: linear-gradient(90deg, #322de5,#00a8ec);
 }

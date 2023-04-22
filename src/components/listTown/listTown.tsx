@@ -1,49 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
-// import listTownReducer from '../../redux/reducer';
-// import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import s from './styleTown.module.css'
 import { ItemTown } from './itemTown';
-
+import { setWeatherThunkCreactor } from "../../redux/setCurrentWeatherReducer";
+import { AppRootStateType, useTypedDispatch } from '../../redux/store';
 export const ListTown = () => {
 
-    const listItemTown = useSelector((state: any) => state.listTown.listOfNewCities)
+    const listItemTown = useSelector((state: AppRootStateType) => state.listTown.LisCurrentCities)
+    
+    const dispatch = useTypedDispatch()
+    const a = (lat: number, lon:number) => {
+        dispatch(setWeatherThunkCreactor(lat, lon ))
+    }
+
     if (listItemTown.length > 1) {
         return (
-            <>
-          {  listItemTown.map((el: any, index: any) =>  <ItemTown key={index}  town={el}/>)}
-            </>
+            <div className={s.grid_town_list}>
+          {  listItemTown.map((el: any, index: number) =>  <ItemTown clickButton={a} key={index}  town={el}/>)}
+            </div>
         )
     } else {
         return null
-    }
+    }   
+  
 }
-
-
-
-
-
-
-
-//refactoring
-// export const ListTownRight = () => {
-
-//     const listItemTown = useSelector((state: any) => state.listTown.listOfNewCities)
-
-    
-//     if (listItemTown.length <1){
-//         return <div>There is no cities</div>
-//     }
-
-//         return (
-//             <>
-//           {  listItemTown.map((el: any) => {
-       
-//                 return (
-//                 <div key={el.index}>
-//                     <div>Name:</div> <span>{el.country}</span>
-//                 </div>
-//                 )
-//             })}
-//             </>
-//         )
-    
-// }
