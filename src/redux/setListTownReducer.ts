@@ -1,16 +1,10 @@
 
-import { Dispatch, ThunkAction } from "@reduxjs/toolkit"
+import { ThunkAction } from "@reduxjs/toolkit"
 import { getTownList } from "../api/api"
 import { AppRootStateType } from "./store"
 
 const SET_TOWN = "SET_TOWN"
 
-// country: "RU"
-// lat: 59.5412777
-// local_names: {en: 'Tosno', ru: 'Тосно', de: 'Tosno', ascii: 'Tosno', feature_name: 'Tosno', …}
-// lon: 30.8773645
-// name: "Tosno"
-// state: "Leningrad oblast"
 
 type ListTownType = {
     LisCurrentCities: Array<ItemOfCityType>
@@ -23,6 +17,7 @@ type ItemOfCityType = {
     lon: number
     name: string
     state:  string
+    
 }
 
 type LocalNamesType = {
@@ -68,11 +63,12 @@ type ThunkCreatorType = ThunkAction<void, AppRootStateType, string, AddTownActio
 
 export const setTownThunkCreacter = (nameTown: string): ThunkCreatorType => {
     return (dispacth) => {
-        getTownList.getNameTown(nameTown)
+      getTownList.getNameTown(nameTown)
             .then(r => {
                 if (r) {
-                    console.log(r);
                     dispacth(addTownActionCreator(r))
+                }else{
+                    alert("Ошибка")
                 }
             });
     }

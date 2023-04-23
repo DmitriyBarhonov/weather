@@ -6,20 +6,19 @@ import { AppRootStateType, useTypedDispatch } from '../../redux/store';
 export const ListTown = () => {
 
     const listItemTown = useSelector((state: AppRootStateType) => state.listTown.LisCurrentCities)
-    
+
     const dispatch = useTypedDispatch()
-    const a = (lat: number, lon:number) => {
-        dispatch(setWeatherThunkCreactor(lat, lon ))
+    const clickButton = (lat: number, lon: number) => {
+        dispatch(setWeatherThunkCreactor(lat, lon))
     }
 
     if (listItemTown.length > 1) {
         return (
             <div className={s.grid_town_list}>
-          {  listItemTown.map((el: any, index: number) =>  <ItemTown clickButton={a} key={index}  town={el}/>)}
+                {listItemTown.map((el: any, index: number) => <ItemTown clickButton={clickButton} key={index} town={el} />)}
             </div>
         )
     } else {
         return null
-    }   
-  
+    }
 }

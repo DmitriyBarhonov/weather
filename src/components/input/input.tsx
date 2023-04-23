@@ -30,7 +30,6 @@ export const InputSearh: React.FC<InputPropsType> = (props) => {
                 value={nameTown}
                 style={{
                     width: 200,
-                    height: '100px', 
                 }}
             />
         </div>

@@ -1,8 +1,6 @@
 import s from './styleTown.module.css'
 
 export const ItemTown = (props: any) => {
-
-
     const { country, lat, lon, name, state } = props.town
 
     return (
