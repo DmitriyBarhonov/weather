@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import style from '../mainPage/styleMainPage.module.css'
+// import style from '../mainPage/styleMainPage.module.css'
 import { setTownThunkCreacter } from '../../redux/setListTownReducer';
 import { InputSearh } from '../input/input';
 import { ListTown } from '../listTown/listTown';
@@ -14,6 +14,7 @@ export const MainPage = () => {
     const dispatch = useTypedDispatch()
     const flagRedirect =  useSelector((state: AppRootStateType)=> state.currentWeather.shouldRedirect)
     
+    console.log(flagRedirect);
     
     const setCityName = (nameTown: string) => {
         dispatch(setTownThunkCreacter(nameTown))

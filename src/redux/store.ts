@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers,createStore } from 'redux'
+import {applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux'
 import listTownReducer, { ListTownActionsType } from './setListTownReducer'
 import  thunkMiddleware from 'redux-thunk'
 import currentWeatherReducer, { AddWeatherActionCreatorType } from './setCurrentWeatherReducer'
