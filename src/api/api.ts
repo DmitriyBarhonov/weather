@@ -18,7 +18,7 @@ export const getTownList = {
 
 export const getWeather = {
     getCurrentWeather(lat:number, lon:number) {
-        return instance.get(`data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+        return instance.get(`data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
             .then(r => {
                 return r.data
             })

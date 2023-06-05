@@ -21,7 +21,6 @@ type ItemOfCityType = {
     lon: number
     name: string
     state: string
-
 }
 
 
@@ -32,7 +31,6 @@ const initialState: ListTownType = {
 
 const listTownReducer = (state: ListTownType = initialState, action: ListTownActionsType): ListTownType => {
 
-
     switch (action.type) {
         case SET_TOWN: {
             return { ...state, LisCurrentCities: action.listOfNewCities }
@@ -42,7 +40,6 @@ const listTownReducer = (state: ListTownType = initialState, action: ListTownAct
 
             return { ...state, isLoading: action.isLoading }
         }
-
         default:
             return state;
     }
