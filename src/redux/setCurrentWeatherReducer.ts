@@ -1,6 +1,7 @@
-import { Dispatch } from "@reduxjs/toolkit"
+import { Dispatch, ThunkAction } from "@reduxjs/toolkit"
 import { getWeather } from "../api/api"
 import { WeatherDataType } from "../components/types/typeDetailedWeather"
+import { AppRootStateType } from "./store"
 
 // const initialState2: WeatherInTownType = {
 //     weatherInfo: {
@@ -40,6 +41,7 @@ import { WeatherDataType } from "../components/types/typeDetailedWeather"
 
 
 const SET_WEATHER = "SET_WEATHER"
+const SET_REDIRECT = "SET-REDIRECT"
 
 type WeatherInTownType = {
     weatherData: WeatherDataType
@@ -54,45 +56,51 @@ const initialState: WeatherInTownType = {
 }
 
 
-const currentWeatherReducer = (state = initialState, action: AddWeatherActionCreatorType): WeatherInTownType => {
+const currentWeatherReducer = (state = initialState, action: CurrentWeatherActionsType): WeatherInTownType => {
 
     switch (action.type) {
-        case SET_WEATHER: {
-            console.log(action.weatherInTown );
-            console.log(action);
-
-            return {
-                ...state,
-                weatherData: action.weatherInTown,
-                shouldRedirect: action.shouldRedirect
-            }
-        }
+        case SET_WEATHER: 
+            return { ...state, weatherData: action.weatherInTown,}
+            case SET_REDIRECT: 
+                return { ...state, shouldRedirect: action.shouldRedirect}
+        
         default:
             return state;
     }
 }
 
+export type CurrentWeatherActionsType = AddWeatherActionCreatorType | ShouldRedirectCreatorType ;
+type ThunkCreatorType = ThunkAction<void, AppRootStateType, string, CurrentWeatherActionsType>
+
 export type AddWeatherActionCreatorType = {
     type: typeof SET_WEATHER,
     weatherInTown: WeatherDataType
-    shouldRedirect: boolean
 }
 
 
 export const addWeatherActionCreator = (weatherInTown: WeatherDataType): AddWeatherActionCreatorType => ({
     type: SET_WEATHER,
-    weatherInTown,
-    shouldRedirect: true
+    weatherInTown
+});
+
+export type ShouldRedirectCreatorType = {
+    type: typeof SET_REDIRECT,
+    shouldRedirect: boolean
+}
+export const  shouldRedirectActionCreator = (shouldRedirect: boolean): ShouldRedirectCreatorType => ({
+    type: SET_REDIRECT,
+    shouldRedirect
 });
 
 
-export const setWeatherThunkCreactor = (lat: number, lon: number): any => {
-    return (dispacth: Dispatch<AddWeatherActionCreatorType>) => {
+export const setWeatherThunkCreactor = (lat: number, lon: number): ThunkCreatorType => {
+    return (dispacth: Dispatch<CurrentWeatherActionsType>) => {
         getWeather.getCurrentWeather(lat, lon)
             .then(r => {
                 if (r) {
                     if (r.cod === 200) {
                         dispacth(addWeatherActionCreator(r))
+                        dispacth(shouldRedirectActionCreator(true))
                     } else {
                         alert("Error");
                     }

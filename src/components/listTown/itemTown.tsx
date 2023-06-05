@@ -1,4 +1,6 @@
 import s from './styleTown.module.css'
+import { Button } from 'antd';
+
 
 export const ItemTown = (props: any) => {
     const { country, lat, lon, name, state } = props.town
@@ -8,7 +10,7 @@ export const ItemTown = (props: any) => {
             <div> Country: {country}</div>
             <div>{name}</div>
             <div> State: {state}</div>
-            <button className={s.button_view} onClick={() => props.clickButton(lat, lon)}>View info</button>
+            <Button type="primary" onClick={() => props.clickButton(lat, lon)}>View info</Button>
         </div>
     )
 }

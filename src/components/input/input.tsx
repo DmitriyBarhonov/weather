@@ -4,21 +4,21 @@ import { ChangeEvent, useState } from 'react';
 const { Search } = Input;
 
 type InputPropsType = {
-    setCityName: (nameTown: string) => void
+    callBack: (nameTown: string) => void
 }
 
 
 
 export const InputSearh: React.FC<InputPropsType> = (props) => {
-    const [nameTown, setNameTown] = useState('');
+    const [title, setTitle] = useState('');
 
     const nameTownHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNameTown(e.currentTarget.value)
+        setTitle(e.currentTarget.value)
     }
 
     const setCityNameHandler = () => {
-        props.setCityName(nameTown)
-        setNameTown('')
+        props.callBack(title)
+        setTitle('')
     }
 
     return (
@@ -27,7 +27,7 @@ export const InputSearh: React.FC<InputPropsType> = (props) => {
                 placeholder="City name"
                 onChange={nameTownHandler}
                 onSearch={setCityNameHandler}
-                value={nameTown}
+                value={title}
                 style={{
                     width: 200,
                 }}

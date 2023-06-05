@@ -2,10 +2,10 @@ body {
   font-size: 1.3rem;
   background: -webkit-linear-gradient(90deg, #5eb4e5, #97cff0, #ffffff);
   background: linear-gradient(90deg, #5eb4e5, #97cff0, #ffffff);
+  font-family: 'Playfair', serif;
 }
 h1{
   font-weight: 100;
-  font-family: Georgia, 'Times New Roman', Times, serif;
   color: #005180;
   text-align: center;
 }

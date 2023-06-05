@@ -1,13 +1,17 @@
-
 import { ThunkAction } from "@reduxjs/toolkit"
 import { getTownList } from "../api/api"
 import { AppRootStateType } from "./store"
 
 const SET_TOWN = "SET_TOWN"
+const SET_LOADING = "SET-LOADING"
 
 
 type ListTownType = {
     LisCurrentCities: Array<ItemOfCityType>
+    isLoading: boolean
+}
+type LocalNamesType = {
+    [key: string]: string
 }
 
 type ItemOfCityType = {
@@ -16,29 +20,27 @@ type ItemOfCityType = {
     local_names?: LocalNamesType
     lon: number
     name: string
-    state:  string
-    
+    state: string
+
 }
 
-type LocalNamesType = {
-    [key: string]: string
-}
 
 const initialState: ListTownType = {
-    LisCurrentCities: []
+    LisCurrentCities: [],
+    isLoading: false
 }
 
-const listTownReducer = (state: ListTownType = initialState, action: ListTownActionsType):ListTownType => {
+const listTownReducer = (state: ListTownType = initialState, action: ListTownActionsType): ListTownType => {
 
 
     switch (action.type) {
         case SET_TOWN: {
-            console.log(action.listOfNewCities);
-            
-            return {
-                ...state,
-                LisCurrentCities: action.listOfNewCities
-            }
+            return { ...state, LisCurrentCities: action.listOfNewCities }
+        }
+        case SET_LOADING: {
+            console.log(action.isLoading);
+
+            return { ...state, isLoading: action.isLoading }
         }
 
         default:
@@ -46,30 +48,43 @@ const listTownReducer = (state: ListTownType = initialState, action: ListTownAct
     }
 
 }
+export type ListTownActionsType = AddTownActionCreatorType | IsLoadingActionCreatorType;
+type ThunkCreatorType = ThunkAction<void, AppRootStateType, string, ListTownActionsType>
 
 type AddTownActionCreatorType = {
     type: typeof SET_TOWN,
     listOfNewCities: ItemOfCityType[]
 }
 
-export type ListTownActionsType = AddTownActionCreatorType;
 
 export const addTownActionCreator = (listOfNewCities: ItemOfCityType[]): AddTownActionCreatorType => ({
     type: SET_TOWN,
     listOfNewCities
 });
 
-type ThunkCreatorType = ThunkAction<void, AppRootStateType, string, AddTownActionCreatorType>
+type IsLoadingActionCreatorType = {
+    type: typeof SET_LOADING,
+    isLoading: boolean
+}
+export const isLoadingActionCreator = (isLoading: boolean): IsLoadingActionCreatorType => ({
+    type: SET_LOADING,
+    isLoading
+});
+
+
 
 export const setTownThunkCreacter = (nameTown: string): ThunkCreatorType => {
     return (dispacth) => {
-      getTownList.getNameTown(nameTown)
+        dispacth(isLoadingActionCreator(true))
+        getTownList.getNameTown(nameTown)
             .then(r => {
                 if (r) {
                     dispacth(addTownActionCreator(r))
-                }else{
+                    dispacth(isLoadingActionCreator(false))
+                } else {
                     alert("Ошибка")
                 }
+
             });
     }
 }
