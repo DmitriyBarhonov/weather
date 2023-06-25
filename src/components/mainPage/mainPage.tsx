@@ -17,13 +17,17 @@ export const MainPage = () => {
     const flagRedirect = useSelector((state: AppRootStateType) => state.currentWeather.shouldRedirect)
     const [searhNewCity, setsearhNewCity] = useState(false)
     const isLoading = useSelector((state: AppRootStateType) => state.listTown.isLoading)
+
+
     const setCityName = (nameTown: string) => {
-        if (!searhNewCity) {
-            dispatch(setTownThunkCreacter(nameTown))
-            setsearhNewCity(true)
-        } else {
+        if (searhNewCity) {
             dispatch(shouldRedirectActionCreator(false))
             dispatch(setTownThunkCreacter(nameTown))
+        } else {
+            dispatch(setTownThunkCreacter(nameTown))
+            setsearhNewCity(true)
+
+
         }
     }
 
